@@ -1,0 +1,32 @@
+$(document).ready(function(){
+
+  $(function () {
+      
+      var table = $('.data-table').DataTable({
+          processing: true,
+          serverSide: true,
+          ajax: "{{ url('products') }}",
+          columns: [
+              // {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+              {data: 'name', name: 'name'},
+              {data: 'price', name: 'price'},
+              {data: 'description', name: 'description'},
+              {data: 'action', name: 'action', orderable: false, searchable: false},
+          ]
+      });
+      
+          $('body').on('click', '.editUser', function () {
+        var product_id = $(this).data('id');
+        $.get("{{ url('products') }}" +'/' + product_id +'/edit', function (data) {
+            $('#modelHeading').html("Edit Product");
+            $('#saveBtn').val("Edit Product");
+            $('#ajaxModel').modal('show');
+            $('#product_id').val(data.id);
+            $('#name').val(data.name);
+            $('#price').val(data.price);
+            $('#description').val(data.description);
+        })
+     });
+
+    });
+

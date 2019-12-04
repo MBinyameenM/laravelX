@@ -32,5 +32,7 @@ Route::match(['get'],'test/{check}',function(){
 Route::resource('users','UserController')->middleware('verified');
 
 Route::get('auth',function(){
-	return App\User::first();
+	return App\Product::select('*')->orderBy('price','desc')->groupBy('price')->get();
 });
+
+Route::resource('products', 'ProductController');

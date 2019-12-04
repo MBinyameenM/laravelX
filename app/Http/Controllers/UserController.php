@@ -13,8 +13,8 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return User::all();
+    {   
+         
     }
 
     /**
@@ -44,7 +44,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $usersDatatable)
     {
         return $user;
     }
@@ -55,9 +55,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $usersDatatable)
     {
-        return $user;
+        return response()->json($usersDatatable);
     }
 
     /**
@@ -67,7 +67,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $usersDatatable)
     {
         //
     }
@@ -78,8 +78,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $usersDatatable)
     {
-        //
+        $usersDatatable->delete();
+        return response()->json(['success' => 'User deleted successfully.']);
     }
 }
